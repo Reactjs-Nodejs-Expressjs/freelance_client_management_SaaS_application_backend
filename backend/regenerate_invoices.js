@@ -37,8 +37,10 @@ const generateInvoiceFile = async (paymentId) => {
       .slice(0, 3)
       .toUpperCase() || 'S';
 
-    // Always use the initials badge style (old pattern) for formal print invoices
-    const brandLogoHtml = `<div class="brand-logo">${logoInitials}</div>`;
+    // Render the uploaded company logo image if configured, otherwise fallback to initials
+    const brandLogoHtml = brandLogoPath
+      ? `<img src="${brandLogoPath}" alt="Logo" class="brand-logo-img shrink-0 object-cover" style="border-radius: 50%;" />`
+      : `<div class="brand-logo">${logoInitials}</div>`;
 
     let clientUser = null;
     if (payment.project) {
