@@ -9,7 +9,7 @@ async function setLogo() {
     // Update admin user logoUrl with the latest uploaded logo
     const result = await User.updateOne(
       { role: 'admin' },
-      { $set: { logoUrl: '/uploads/admin/logo/brand_logo_1780730969460.jpg' } }
+      { $set: { logoUrl: '/uploads/admin/logo/brand_logo_new.jpg' } }
     );
     
     console.log("Update result:", result);
