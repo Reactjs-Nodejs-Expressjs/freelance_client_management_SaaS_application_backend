@@ -1,0 +1,9 @@
+{
+  "name": "freelance-management-root",
+  "version": "1.0.0",
+  "description": "Root configuration to manage dependencies and startup for Render deployment",
+  "scripts": {
+    "postinstall": "cd backend && npm install",
+    "start": "node backend/server.js"
+  }
+}
