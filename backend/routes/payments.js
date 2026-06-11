@@ -9,6 +9,8 @@ const Message = require('../models/Message');
 const fs = require('fs');
 const path = require('path');
 
+const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+
 const generateInvoiceFile = async (paymentId) => {
   const { generateInvoiceFile: gen } = require('../utils/invoice');
   return gen(paymentId);
@@ -25,7 +27,7 @@ const generateInvoiceFile = async (paymentId) => {
     const adminLogoText = adminUser ? (adminUser.logoText || 'Strategic Brand') : 'Strategic Brand';
 
     const brandLogoPath = adminUser && adminUser.logoUrl
-      ? (adminUser.logoUrl.startsWith('http') ? adminUser.logoUrl : `http://localhost:5000${adminUser.logoUrl}`)
+      ? (adminUser.logoUrl.startsWith('http') ? adminUser.logoUrl : `${backendUrl}${adminUser.logoUrl}`)
       : '';
 
     const logoInitials = adminLogoText
@@ -605,7 +607,7 @@ const sendInvoiceToChat = async (payment, req, force = false) => {
     }
 
     const Message = require('../models/Message');
-    const invoiceUrl = `http://localhost:5000/uploads/invoices/invoice-${payment._id}.html`;
+    const invoiceUrl = `${backendUrl}/uploads/invoices/invoice-${payment._id}.html`;
     const msgText = `Here is your invoice for project **${payment.projectName || 'Direct Payment'}**:\n${invoiceUrl}`;
     
     // Check if message with this invoice URL already exists to be extra safe
@@ -1179,7 +1181,7 @@ router.post('/:id/send-invoice', protect, admin, async (req, res) => {
     // Send invoice to chat, forcing it to resend if already sent
     await sendInvoiceToChat(payment, req, true);
 
-    const invoiceUrl = `http://localhost:5000/uploads/invoices/invoice-${payment._id}.html`;
+    const invoiceUrl = `${backendUrl}/uploads/invoices/invoice-${payment._id}.html`;
     return res.json({ success: true, url: invoiceUrl });
 
   } catch (error) {

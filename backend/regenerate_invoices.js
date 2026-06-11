@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+
 const Payment = require('./models/Payment');
 const Project = require('./models/Project');
 const User = require('./models/User');
@@ -25,7 +27,7 @@ const generateInvoiceFile = async (paymentId) => {
     const adminLogoText = adminUser ? (adminUser.logoText || 'Strategic Brand') : 'Strategic Brand';
 
     const brandLogoPath = adminUser && adminUser.logoUrl
-      ? (adminUser.logoUrl.startsWith('http') ? adminUser.logoUrl : `http://localhost:5000${adminUser.logoUrl}`)
+      ? (adminUser.logoUrl.startsWith('http') ? adminUser.logoUrl : `${backendUrl}${adminUser.logoUrl}`)
       : '';
 
     const logoInitials = adminLogoText

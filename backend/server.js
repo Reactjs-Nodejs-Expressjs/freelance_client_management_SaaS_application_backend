@@ -9,6 +9,7 @@ const { protect } = require('./middleware/auth');
 
 // Load environment variables
 dotenv.config();
+const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
 
 // Connect to Database
 connectDB();
@@ -66,7 +67,7 @@ const uploadChat = multer({
 // Payment screenshot upload endpoint
 app.post('/api/uploads', protect, uploadPayment.single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-  const fileUrl = `http://localhost:5000/uploads/payments/${req.file.filename}`;
+  const fileUrl = `${backendUrl}/uploads/payments/${req.file.filename}`;
   return res.json({ url: fileUrl, filename: req.file.filename });
 });
 
@@ -82,7 +83,7 @@ app.post('/api/uploads/chat', protect, (req, res) => {
       return res.status(550).json({ error: err.message });
     }
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-    const fileUrl = `http://localhost:5000/uploads/chat/${req.file.filename}`;
+    const fileUrl = `${backendUrl}/uploads/chat/${req.file.filename}`;
     return res.json({ url: fileUrl, filename: req.file.filename });
   });
 });
@@ -122,7 +123,7 @@ app.post('/api/uploads/profile', protect, (req, res) => {
   uploadProfile.single('file')(req, res, (err) => {
     if (err) return res.status(400).json({ error: err.message });
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-    const fileUrl = `http://localhost:5000/uploads/profiles/${req.file.filename}`;
+    const fileUrl = `${backendUrl}/uploads/profiles/${req.file.filename}`;
     return res.json({ url: fileUrl, filename: req.file.filename });
   });
 });
@@ -132,7 +133,7 @@ app.post('/api/uploads/notes', protect, (req, res) => {
   uploadNotes.single('file')(req, res, (err) => {
     if (err) return res.status(400).json({ error: err.message });
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-    const fileUrl = `http://localhost:5000/uploads/note/popupnote/${req.file.filename}`;
+    const fileUrl = `${backendUrl}/uploads/note/popupnote/${req.file.filename}`;
     return res.json({ url: fileUrl, filename: req.file.filename });
   });
 });
