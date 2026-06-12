@@ -956,6 +956,9 @@ router.post('/direct-submit', protect, async (req, res) => {
       screenshotUrl,
     });
 
+    // Auto-generate HTML invoice
+    await generateInvoiceFile(payment._id);
+
     // Notify admin
     const adminUser = await User.findOne({ role: 'admin' });
     if (adminUser) {
@@ -1003,6 +1006,9 @@ router.post('/:id/submit', protect, async (req, res) => {
 
     await payment.save();
 
+    // Auto-generate/update HTML invoice file
+    await generateInvoiceFile(payment._id);
+
     // Create project timeline activity log
     project.updates.push({
       title: 'Payment Receipt Uploaded 💳',
@@ -1044,6 +1050,9 @@ router.post('/:id/verify-step1', protect, admin, async (req, res) => {
     payment.firstVerifiedAt = new Date();
 
     await payment.save();
+
+    // Auto-generate/update HTML invoice file
+    await generateInvoiceFile(payment._id);
 
     // Create activity timeline log on the project
     const project = await Project.findById(payment.project);
@@ -1134,6 +1143,9 @@ router.post('/:id/reject', protect, admin, async (req, res) => {
     payment.rejectedAt = new Date();
 
     await payment.save();
+
+    // Auto-generate/update HTML invoice file
+    await generateInvoiceFile(payment._id);
 
     // Log update on the project timeline if exists
     const project = await Project.findById(payment.project);

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice - TechFlow Brand Strategy & Rebranding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-dark: #6d28d9;
+      --primary-light: #a78bfa;
+      --accent: #10b981;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      background-color: #f1f5f9;
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .container {
+      width: 210mm;
+      height: 297mm;
+      margin: 30px auto;
+      padding: 15mm 15mm;
+      background-color: var(--bg-card);
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+    .gradient-banner {
+      height: 4px;
+      background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 50%, #10b981 100%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+    .invoice-body {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+    .brand-title-centered {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-top: 10px;
+      margin-bottom: 2px;
+      letter-spacing: -0.5px;
+    }
+    .brand-subtitle-centered {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .brand-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+    }
+    .brand-logo-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+      object-fit: cover;
+    }
+    .divider {
+      height: 1px;
+      background-color: var(--border-color);
+      margin-bottom: 20px;
+    }
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .invoice-title-block {
+      text-align: left;
+    }
+    .invoice-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--text-main);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin: 0 0 6px 0;
+    }
+    .invoice-meta-item {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .invoice-meta-item span {
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .agency-details {
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .billing-status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+    }
+    .client-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .client-info {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .status-pill-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 12px;
+      border: 1.5px solid;
+    }
+    .status-verified {
+      color: #10b981;
+      border-color: #a7f3d0;
+      background-color: #ecfdf5;
+    }
+    .status-pending {
+      color: #d97706;
+      border-color: #fde68a;
+      background-color: #fefbeb;
+    }
+    .status-submitted {
+      color: #2563eb;
+      border-color: #bfdbfe;
+      background-color: #eff6ff;
+    }
+    .status-rejected {
+      color: #dc2626;
+      border-color: #fca5a5;
+      background-color: #fef2f2;
+    }
+    .check-icon {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .item-box {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+    .item-box-header {
+      background-color: #f8fafc;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 1.2px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .item-box-body {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+    }
+    .item-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .item-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .item-amount {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .total-due-box {
+      background-color: #f8fafc;
+      border-radius: 12px;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+    }
+    .total-due-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      max-width: 60%;
+      line-height: 1.5;
+    }
+    .total-due-amount-container {
+      text-align: right;
+    }
+    .total-due-amount {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+    .payment-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .payment-info-left {
+      text-align: left;
+    }
+    .payment-method-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .payment-method-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .payment-method-desc span {
+      font-family: monospace;
+      font-weight: 750;
+      color: var(--text-main);
+      background-color: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .qr-code-container {
+      padding: 6px;
+      background-color: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      display: inline-block;
+    }
+    .qr-code-img {
+      width: 80px;
+      height: 80px;
+      display: block;
+    }
+    .footer {
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+      margin-top: auto;
+    }
+    .footer .thank-you {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 12px;
+      margin: 0 0 3px 0;
+    }
+    .footer .disclaimer {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .actions-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 12px;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 12px;
+    }
+    .btn {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary {
+      background-color: transparent;
+      border: 1.5px solid #0f172a;
+      color: #0f172a;
+    }
+    .btn-secondary:hover {
+      background-color: #f8fafc;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, #6d28d9 100%);
+      border: none;
+      color: white;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px rgba(124, 58, 237, 0.25);
+    }
+    @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      body {
+        background: #ffffff;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .container {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 15mm 15mm;
+        background: #ffffff;
+        box-sizing: border-box;
+        page-break-inside: avoid;
+      }
+      .gradient-banner {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="gradient-banner"></div>
+    
+    <div class="invoice-body">
+      <div class="logo-container">
+        <img src="http://localhost:5000/uploads/admin/logo/brand_logo_1780981779072.webp" alt="Logo" class="brand-logo-img shrink-0 object-cover" />
+        <div class="brand-title-centered">Strategic Brand Solutions</div>
+        <div class="brand-subtitle-centered">Creative Digital Consultancy</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="invoice-header">
+        <div class="invoice-title-block">
+          <div class="invoice-title">Invoice</div>
+          <div class="invoice-meta-item">Invoice Reference: <span>#SBS-INV-48F31D</span></div>
+          <div class="invoice-meta-item">Issue Date: <span>June 6, 2026</span></div>
+        </div>
+        <div class="agency-details">
+          <div>akhilthadaka97@gmail.com</div>
+          <div>Phone: 9121751697</div>
+          <div>Warangal, Telangana </div>
+        </div>
+      </div>
+      
+      <div class="billing-status-row">
+        <div class="billed-to">
+          <div class="section-label">BILLED TO</div>
+          <div class="client-name">Arjun Sen</div>
+          <div class="client-info">arjun@techflow.in</div>
+          <div class="client-info">Company: TechFlow Solutions</div>
+          <div class="client-info">Phone: +91 98765 43210</div>
+        </div>
+        <div class="status-box">
+          <div class="section-label" style="text-align: right;">PAYMENT STATUS</div>
+          <div class="status-pill-large status-verified">
+            Verified / Paid <span class="check-icon">✓</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="item-box">
+        <div class="item-box-header">
+          <div>SERVICE / PROJECT ITEM</div>
+          <div>REQUESTED AMOUNT</div>
+        </div>
+        <div class="item-box-body">
+          <div>
+            <div class="item-title">TechFlow Brand Strategy & Rebranding</div>
+            <div class="item-subtitle">Bank Transfer (Manual Payment) - paid</div>
+          </div>
+          <div class="item-amount">₹1,00,000</div>
+        </div>
+      </div>
+      
+      <div class="total-due-box">
+        <div class="total-due-text">
+          All invoice transactions are secured by Strategic Brand Solutions. Please complete pending payments via payment QR codes or direct transfer.
+        </div>
+        <div class="total-due-amount-container">
+          <div class="section-label" style="margin-bottom: 2px;">TOTAL BILL DUE</div>
+          <div class="total-due-amount">₹1,00,000</div>
+        </div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="payment-info-row">
+        <div class="payment-info-left">
+          <div class="section-label">PAYMENT INFORMATION</div>
+          <div class="payment-method-title">UPI Payment (GPay / PhonePe / Paytm)</div>
+          <div class="payment-method-desc">UPI ID: <span>akhilthadaka1@ybl</span></div>
+        </div>
+        <div class="payment-info-right">
+          <div class="qr-code-container">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi%3A%2F%2Fpay%3Fpa%3Dakhilthadaka1%40ybl%26pn%3DStrategic%20Brand%20Solutions%26cu%3DINR%26am%3D100000" alt="UPI QR Code" class="qr-code-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p class="thank-you">Thank you for choosing Strategic Brand Solutions!</p>
+      <p class="disclaimer">This is a system generated document. For billing queries, please contact akhilthadaka97@gmail.com.</p>
+      
+      <div class="actions-row no-print">
+        <button class="btn btn-secondary" onclick="window.opener ? window.close() : window.location.href='/client/payments'">Completed</button>
+        <button class="btn btn-primary" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

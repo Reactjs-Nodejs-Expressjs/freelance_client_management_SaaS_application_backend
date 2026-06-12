@@ -75,6 +75,9 @@ const generateInvoiceFile = async (paymentId) => {
     } else if (payment.status === 'submitted') {
       statusClass = 'status-submitted';
       statusLabel = 'Submitted';
+    } else if (payment.status === 'first_verified') {
+      statusClass = 'status-submitted';
+      statusLabel = 'First Verified';
     } else if (payment.status === 'rejected') {
       statusClass = 'status-rejected';
       statusLabel = 'Rejected';

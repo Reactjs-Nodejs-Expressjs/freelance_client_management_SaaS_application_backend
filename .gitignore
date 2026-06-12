@@ -6,7 +6,7 @@ backend/node_modules/
 backend/.env
 
 # Local upload directories
-backend/uploads/
+# backend/uploads/
 
 # Logs
 logs
